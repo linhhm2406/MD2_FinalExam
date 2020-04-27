@@ -242,11 +242,22 @@ public class ContactManagement {
         do {
             contactToDelete = havePhoneNumberInList(getPhoneNumberFromUser());
             if (contactToDelete != null) {
-                contactList.remove(contactToDelete);
-            } else {
-                System.out.println("Can not find Phone Number, please input again");
+                if (confirmToDelete()) {
+                    contactList.remove(contactToDelete);
+                } else {
+                    System.out.println("Can not find Phone Number, please input again");
+                }
             }
+        } while (contactToDelete == null);
+    }
+
+    public boolean confirmToDelete() {
+        System.out.println("Delete ? (Y/N)");
+        String confirm = scanner.nextLine();
+        boolean conclude = false;
+        if (confirm.equals("Y")) {
+            conclude = true;
         }
-        while (contactToDelete == null);
+        return conclude;
     }
 }
